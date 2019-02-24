@@ -2,6 +2,8 @@
 
 ## Widgets Used
 
+> Widgets from different libraries in the Flutter framework are compatible and can work together in a single app.
+
 - [MaterialApp](http://docs.flutter.io/flutter/material/MaterialApp/MaterialApp.html)
 
 This Widget is the skeleton for Widgets that use Material Design. It adds material-design specific functionality, such as [AnimatedTheme](https://docs.flutter.io/flutter/material/AnimatedTheme-class.html) and [GridPaper](https://docs.flutter.io/flutter/widgets/GridPaper-class.html).
@@ -25,7 +27,7 @@ So if you have:
 
 Your home screen will show an AppBar with the Text of "Chat UI".
 
-- [Scaffold](https://docs.flutter.io/flutter/material/Scaffold-class.html)
+- [Scaffold](https://docs.flutter.io/flutter/material/Scaffold-class.html) - Specific to Material Design apps
 
 The Scaffold Widget implements the basic material design visual layout structure. It provides APIs for showing drawers, snack bars, and bottom sheets.
 
@@ -41,13 +43,19 @@ The Scaffold Widget implements the basic material design visual layout structure
 
 ![](http://i64.tinypic.com/29kqc86.png)
 
-- [AppBar](http://docs.flutter.io/flutter/material/AppBar/AppBar.html)
+- [AppBar](http://docs.flutter.io/flutter/material/AppBar/AppBar.html) - Specific to Material Design apps
 
 This Widget creates a material design app bar. It is used to show a static title for the app.
 
 It is typically used in the Scaffold.appBar property.
 
 ![](http://i63.tinypic.com/2lo25vn.png)
+
+- [Text](https://docs.flutter.io/flutter/widgets/Text-class.html) - Generic
+
+The Text widget displays a string of text with single style.
+
+---
 
 Project from [Google Code Labs](https://codelabs.developers.google.com/codelabs/flutter/#3)
 
