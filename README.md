@@ -201,6 +201,16 @@ To create an AnimationController in a class that uses this mixin, pass vsync: th
 
 If you only have a single Ticker (for example only a single AnimationController) for the lifetime of your State, then using a SingleTickerProviderStateMixin is more efficient. This is the common case.
 
+- [Expanded](https://docs.flutter.io/flutter/widgets/Expanded-class.html)
+
+Expanded allows a widget like Column to impose layout constraints (in this case the Column's width), on a child widget.
+
+A widget that expands a child of a Row, Column, or Flex.
+
+Using an Expanded widget makes a child of a Row, Column, or Flex expand to fill the available space in the main axis (e.g., horizontally for a Row or vertically for a Column). If multiple children are expanded, the available space is divided among them according to the flex factor.
+
+An Expanded widget must be a descendant of a Row, Column, or Flex, and the path from the Expanded widget to its enclosing Row, Column, or Flex must contain only StatelessWidgets or StatefulWidgets (not other kinds of widgets, like RenderObjectWidgets).
+
 ---
 
 ## State
