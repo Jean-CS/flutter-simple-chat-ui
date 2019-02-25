@@ -55,7 +55,7 @@ It is typically used in the Scaffold.appBar property.
 
 The Text widget displays a string of text with single style.
 
-- [TextField](http://docs.flutter.io/flutter/material/TextField-class.html)
+- [TextField](http://docs.flutter.io/flutter/material/TextField-class.html) - Specific to Material Design
 
 A material design text field.
 
@@ -89,9 +89,47 @@ The EdgeInsets class specifies offsets in terms of visual edges, left, top, righ
 
 - InputDecoration
 
-- [Row]
+- [Row](https://docs.flutter.io/flutter/widgets/Row-class.html)
 
-- [IconButton]
+A widget that displays its children in a horizontal array.
+
+Since we want to display the button adjacent to the input field, we'll use a Row widget as the parent.
+
+- [Flexible](https://docs.flutter.io/flutter/widgets/Flexible-class.html)
+
+This tells the Row to automatically size the text field to use the remaining space that isn't used by the button.
+
+A widget that controls how a child of a Row, Column, or Flex flexes.
+
+Using a Flexible widget gives a child of a Row, Column, or Flex the flexibility to expand to fill the available space in the main axis (e.g., horizontally for a Row or vertically for a Column), but, unlike Expanded, Flexible does not require the child to fill the available space.
+
+- [IconButton](http://docs.flutter.io/flutter/material/IconButton-class.html) - Specific to Material Design
+
+A material design icon button.
+
+An icon button is a picture printed on a Material widget that reacts to touches by filling with color (ink).
+
+Icon buttons are commonly used in the AppBar.actions field, but they can be used in many other places as well.
+
+If the onPressed callback is null, then the button will be disabled and will not react to touch.
+
+Requires one of its ancestors to be a Material widget.
+
+- [Icons](https://docs.flutter.io/flutter/material/Icons-class.html)
+
+Identifiers for the supported material design icons.
+
+Use with the Icon class to show specific icons.
+
+- [Icon](https://docs.flutter.io/flutter/widgets/Icon-class.html)
+
+A graphical icon widget drawn with a glyph from a font described in an IconData such as material's predefined IconDatas in Icons.
+
+- IconTheme, IconeThemeData, ThemeData
+
+Icons inherit their color, opacity, and size from an IconTheme widget, which uses an IconThemeData object to define these characteristics. Wrap all the widgets in the _buildTextComposer() method in an IconTheme widget, and use its data property to specify the ThemeData object of the current theme. This gives the button (and any other icons in this part of the widget tree) the accent color of the current theme.
+
+
 
 ---
 
