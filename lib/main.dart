@@ -29,6 +29,8 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
+  // a private member variable that is true whenever the user is typing in the input field.
+  bool _isComposing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +84,9 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 // we'll provide the TextField constructor with a TextEditingController.
                 // This controller can also be used to clear the field or read its value.
                 controller: _textController,
+                onChanged: (String text) {
+                  setState(() => _isComposing = text.length > 0);
+                },
                 // To be notified when the user submits a message,
                 // use the onSubmitted argument to provide a private
                 // callback method _handleSubmitted().
@@ -94,7 +99,9 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               margin: EdgeInsets.symmetric(horizontal: 4.0),
               child: IconButton(
                 icon: Icon(Icons.send),
-                onPressed: () => _handleSubmitted(_textController.text),
+                onPressed: _isComposing
+                    ? () => _handleSubmitted(_textController.text)
+                    : null,
               ),
             )
           ],
@@ -107,6 +114,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   // to code to send the message.
   void _handleSubmitted(String text) {
     _textController.clear();
+    setState(() => _isComposing = false);
     ChatMessage message = ChatMessage(
       text: text,
       animationController: AnimationController(
