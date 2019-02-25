@@ -185,7 +185,21 @@ The body of the box is painted in layers. The bottom-most layer is the color, wh
 
 The border paints over the body; the boxShadow, naturally, paints below it.
 
+- [AnimationController](http://docs.flutter.io/flutter/animation/AnimationController-class.html)
 
+The AnimationController class lets you define important characteristics of the animation, such as its duration and playback direction (forward or reverse).
+
+When creating an AnimationController, you must pass it a vsync argument. The vsync prevents animations that are offscreen from consuming unnecessary resources. To use your ChatScreenState as the vsync, include a TickerProviderStateMixin mixin in the ChatScreenState class definition.
+
+- [TickerProviderStateMixin](https://docs.flutter.io/flutter/widgets/TickerProviderStateMixin-mixin.html)
+
+> **Tip**: In Dart, a mixin allows a class body to be reused in multiple class hierarchies. For more information, see Classes, a section in the Dart Language Tour.
+
+Provides [Ticker](https://docs.flutter.io/flutter/scheduler/Ticker-class.html) objects that are configured to only tick while the current tree is enabled, as defined by TickerMode.
+
+To create an AnimationController in a class that uses this mixin, pass vsync: this to the animation controller constructor whenever you create a new animation controller.
+
+If you only have a single Ticker (for example only a single AnimationController) for the lifetime of your State, then using a SingleTickerProviderStateMixin is more efficient. This is the common case.
 
 ---
 

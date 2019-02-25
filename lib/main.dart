@@ -26,7 +26,7 @@ class ChatScreen extends StatefulWidget {
   State createState() => ChatScreenState();
 }
 
-class ChatScreenState extends State<ChatScreen> {
+class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
 
@@ -107,43 +107,75 @@ class ChatScreenState extends State<ChatScreen> {
   // to code to send the message.
   void _handleSubmitted(String text) {
     _textController.clear();
-    ChatMessage message = ChatMessage(text: text);
+    ChatMessage message = ChatMessage(
+      text: text,
+      animationController: AnimationController(
+        duration: Duration(milliseconds: 350),
+        vsync: this,
+      ),
+    );
     setState(() => _messages.insert(0, message));
+    message.animationController.forward();
+  }
+
+  /*
+  * It's good practice to dispose of your animation controllers to 
+  * free up your resources when they are no longer needed. 
+  * The following code snippet shows how you can implement this operation 
+  * by overriding the dispose() method in ChatScreenState. 
+  * In the current app, the framework does not call the dispose() method 
+  * since the app only has a single screen. In a more complex app with 
+  * multiple screens, the framework would invoke the method when the 
+  * ChatScreenState object was no longer in use.
+  */
+  @override
+  void dispose() {
+    for (ChatMessage message in _messages)
+      message.animationController.dispose();
+    super.dispose();
   }
 }
 
 class ChatMessage extends StatelessWidget {
   final String text;
+  final AnimationController animationController;
 
-  ChatMessage({this.text});
+  ChatMessage({this.text, this.animationController});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(right: 16.0),
-            child: CircleAvatar(
-              child: Text(_name[0]),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              //  Its textTheme property gives you access to Material Design
-              // logical styles for text like subhead, so you can avoid
-              // hard-coding font sizes and other text attributes.
-              Text(_name, style: Theme.of(context).textTheme.subhead),
-              Container(
-                margin: const EdgeInsets.only(top: 5.0),
-                child: Text(text),
+    return SizeTransition(
+      sizeFactor: CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeOut,
+      ),
+      axisAlignment: 0.0,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.only(right: 16.0),
+              child: CircleAvatar(
+                child: Text(_name[0]),
               ),
-            ],
-          ),
-        ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                //  Its textTheme property gives you access to Material Design
+                // logical styles for text like subhead, so you can avoid
+                // hard-coding font sizes and other text attributes.
+                Text(_name, style: Theme.of(context).textTheme.subhead),
+                Container(
+                  margin: const EdgeInsets.only(top: 5.0),
+                  child: Text(text),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
